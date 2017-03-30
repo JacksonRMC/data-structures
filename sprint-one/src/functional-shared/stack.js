@@ -12,18 +12,15 @@ var Stack = function() {
     _.extend(stack, funcMethods);
 
     return stack;
-	// // Usage
-	// var myFunc = Func();
-	// myFunc.logA(); 
+	
 };
 
 	var funcMethods = {};
 
 
 	funcMethods.push = function(value) {
-	  //debugger;
 	  this.count++;
-	  funcMethods[this.count] = value
+	  funcMethods[this.count] = value;
 	}
 
 	funcMethods.pop = function() {
