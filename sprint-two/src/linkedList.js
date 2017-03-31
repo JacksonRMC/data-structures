@@ -4,17 +4,21 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
-   
+   //debugger;
+
     if(list.head === null){
       list.head = Node(value);
-    }
+    } else {
 
-    list.tail = Node(value);
+    }
+    list.head.next = Node(value);
+    list.tail = Node(value);//  ASSIGNED LITS.TAIL TO NODE SO WE HAVE AANEXT VALUE FOR EACH INCOMING OBJ
+    //console.log(list.tail)
       
   };
 
   list.removeHead = function() {
-    
+    //debugger;
     var firstNode = list.head;
     if (firstNode.next === null) {
       list.head = list.tail;
@@ -26,17 +30,23 @@ var LinkedList = function() {
 
   list.contains = function(target) {
     var nodeSearch = function(nodeForSearch){
-      if(nodeForSearch.value === target){
-        return true;
-      } else {
-        if(nodeForSearch.next !== null){
-          nodeSearch(nodeForSearch.next);
-        }
+      if(nodeForSearch.next === null){ //CREATED NEW CONDITIONAL TO DEAL WITH VALUES IN NEXT OBJECT
+        return false;
       }
+
+      if(nodeForSearch.value === target){  
+        return true;
+      } else if(nodeForSearch.next.value === target){
+        return true;     
+      } else {
+        return false;
+      }
+
     }
-    console.log(list.head);
-    nodeSearch(list.head);
-    return false;
+    
+    
+     return nodeSearch(list.head); //RETURN THE FUNCTION INSTEAD OF CALLING IT RECURSIVELY
+     //WAS AWESOME!!!!!
   };
 
   return list;
