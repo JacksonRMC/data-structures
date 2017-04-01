@@ -16,8 +16,8 @@ treeMethods.addChild = function(value) {
  	
  	//newTree.value = Node(value);
  	this.value = value;
-	this.children.push(Node(value));
-	console.log(this);
+	this.children.push(treeNode(value));
+	//console.log(this);
 	// .children[0].value).to.equal(5);  <-- FROM TESTER
 
 
@@ -52,7 +52,7 @@ treeMethods.contains = function(target) {
 };
 
 // NODE-CREATION FUNCTION HERE
-var Node = function(value) {
+var treeNode = function(value) {
   var newNode = {};
 //  var childArray = [];
   newNode.value = value;
