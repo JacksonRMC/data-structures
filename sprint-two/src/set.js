@@ -6,11 +6,13 @@ var Set = function() {
 
 var setPrototype = {};
 
-setPrototype.add = function(item) {
-  this.storage.push(item);
+setPrototype.add = function(item) { //O(n) Linear
+  if (this.contains(item) === false) {
+    this.storage.push(item);
+  }
 };
 
-setPrototype.contains = function(item) {
+setPrototype.contains = function(item) { //O(n) Linear
   for(var i = 0 ; i < this.storage.length; i++){
   	if(this.storage[i] === item){
   		return true;
@@ -19,12 +21,10 @@ setPrototype.contains = function(item) {
   return false;
 };
 
-setPrototype.remove = function(item) {
+setPrototype.remove = function(item) { //O(n) linear
   for(var i = 0 ; i < this.storage.length; i++){
   	if(this.storage[i] === item){
-  	  console.log(this.storage);
   	  this.storage.splice(i, 1);
-  	  console.log(this.storage)
   	}
   }
 };

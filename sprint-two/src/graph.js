@@ -1,5 +1,3 @@
-
-
 // Instantiate a new graph
 var Graph = function(node) {
 	this.nodeList = {};
@@ -9,7 +7,6 @@ var Graph = function(node) {
 Graph.prototype.addNode = function(node) {
 	var nodeName = node;
 	this.nodeList[node] = new GraphNode(node)
-	//console.log(this.nodeList)
 	
 };
 
@@ -34,7 +31,6 @@ Graph.prototype.removeNode = function(node) {
 	}
 
 	for(var key in this.nodeList){
-		//console.log(this.nodeList)
 		for(var i = 0 ; i < this.nodeList[key].edgeList.length; i++ ){
 			if(this.nodeList[key].edgeList[i] === node){				
 				this.nodeList[key].edgeList.splice(i, 1);
@@ -49,18 +45,18 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 	var result = false;
 	var result2 = false;
 	
-	for(var i = 0 ; i < this.nodeList[fromNode].edgeList.length; i++ ){
-		if (this.nodeList[fromNode].edgeList[i] === toNode){
-			result = true;
+	if (this.nodeList[fromNode] !== undefined && this.nodeList[toNode] !== undefined){
+		for(var i = 0 ; i < this.nodeList[fromNode].edgeList.length; i++ ){
+			if (this.nodeList[fromNode].edgeList[i] === toNode){
+				result = true;
+			}
 		}
-	}
-	for (var i = 0; i < this.nodeList[toNode].edgeList.length; i++) {
-		if(this.nodeList[toNode].edgeList[i] === fromNode){
-			//console.log(this.nodeList[toNode].edgeList[i])
-			result2 = true;
+		for (var i = 0; i < this.nodeList[toNode].edgeList.length; i++) {
+			if(this.nodeList[toNode].edgeList[i] === fromNode){
+				result2 = true;
+			}
 		}
-	}
-	
+	}	
 	if (result2 && result){
 		return true;
 	} else {
@@ -73,37 +69,41 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 Graph.prototype.addEdge = function(fromNode, toNode) {
 	this.nodeList[fromNode].edgeList.push(toNode);
 	this.nodeList[toNode].edgeList.push(fromNode);
-	// console.log(this.nodeList)
-	//.push(toNode);
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
 
-for(var i = 0 ; i < this.nodeList[fromNode].edgeList.length; i++ ){
-	if (this.nodeList[fromNode].edgeList[i] === toNode){
+if (this.nodeList[fromNode] !== undefined && this.nodeList[toNode] !== undefined){
+	for(var i = 0 ; i < this.nodeList[fromNode].edgeList.length; i++ ){
+		if (this.nodeList[fromNode].edgeList[i] === toNode){
 			this.nodeList[fromNode].edgeList.splice(i, 1);
 		}
 	}
+
 	for (var i = 0; i < this.nodeList[toNode].edgeList.length; i++) {
 		if(this.nodeList[toNode].edgeList[i] === fromNode){
 			this.nodeList[toNode].edgeList.splice(i, 1);
 		}
 	}
+}
+};
 
+Graph.prototype.reportSize = function(){
+	return Object.keys(this.nodeList).length;
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  for(var key in this.nodeList){
+  	cb(this.nodeList[key].value);
+  }
+	
 };
 
 var GraphNode = function(value) {
-//  var childArray = [];
   this.value = value;
- 	//console.log(node.value);
   this.edgeList = [];
- 	//console.log(node.edgeList);
-// 	console.log(node);
 };
 /*
  * Complexity: What is the time complexity of the above functions?
